@@ -1,0 +1,11 @@
+install.packages("pryr")
+install.packages("plyr")
+library(data.table)
+library(plyr)
+library(pryr)
+Student_assignment_6 <- read.table("Assignment 6 Dataset.txt", header = T, sep = ",")
+Student_assignment_6
+StudentAverage <- ddply(Student_assignment_6, "Sex", summarise, Grade.Average = mean(Grade, na.rm = TRUE))
+write.table(StudentAverage, "Students_Gendered_Mean.txt", row.names = FALSE)
+i_students <- subset(Student_assignment_6, grepl("i", Name, ignore.case = TRUE))
+write.csv(i_students, "Students_With_i.csv", row.names = FALSE)
